@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/font-awesome.css"/>
+    
+
+    <style>
+        body {
+          padding-top: 5rem;
+        }
+
+    </style>
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+	      <a class="navbar-brand" href="#">SIDUK</a>
+	      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	
+	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="/">Home</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+	          </li>
+	        </ul>
+	        
+	      </div>
+	  </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <main class="col-sm-12" role="main">
+          <h1>Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</h1>
+          <p>Selamat datang di Sistem Informasi Kependudukan Online Provinsi DKI Jakarta</p>
+
+          <hr/>
+          	<a href="penduduk/tambah" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+          	 Add Penduduk</a>
+          	 <a href="keluarga/tambah" class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i>
+          	 Add Keluarga</a>
+          <hr/>
+
+          <h3>Lihat Data Penduduk Berdasarkan NIK</h3>
+          <p><b>Masukkan Nomor Induk Kependudukan</b></p>
+          <form action="/penduduk">
+            <input name="nik"/>
+            <button type="submit">Lihat</button>
+          </form>
+
+          <hr/>
+
+          <h3>Lihat Data Keluarga Berdasarkan NKK</h3>
+          <p><b>Masukkan Nomor Kartu Keluarga</b></p>
+          <form action="/keluarga">
+            <input name="nkk"/>
+            <button type="submit">Lihat</button>
+          </form>
+
+          
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

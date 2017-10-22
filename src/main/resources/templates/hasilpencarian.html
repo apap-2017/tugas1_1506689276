@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+    <link rel="stylesheet" href="/css/jquery.dataTables.min.css"/>
+
+    <style>
+        body {
+          padding-top: 5rem;
+        }
+
+    </style>
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+	      <a class="navbar-brand" href="#">SIDUK</a>
+	      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	
+	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="/">Home</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+	          </li>
+	        </ul>
+	        
+	      </div>
+	  </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <main class="col-sm-12" role="main">
+          <h1>Hasil Pencarian</h1>
+          
+          Menampilkan hasil pencarian Kelurahan <span th:text="${kelurahan.nama_kelurahan}"></span>, Kecamatan <span th:text="${kelurahan.kecamatan.nama_kecamatan}"></span>, <span th:text="${kelurahan.kecamatan.kota.nama_kota}"></span>
+          <br/> <br/>
+          <div class="row">
+          	<div class="col-md-6">
+          		<h3>Penduduk Paling Tua</h3>
+          		<table>
+          			<tr>
+          				<td style="padding-right:10px">NIK</td>
+          				<td th:text="${oldest.nik}"></td>
+          			</tr>
+          			<tr>
+          				<td style="padding-right:10px">Nama</td>
+          				<td th:text="${oldest.nama}"></td>
+          			</tr>
+          			<tr>
+          				<td style="padding-right:10px">Tanggal Lahir</td>
+          				<td th:text="${oldest.tanggal_lahir}"></td>
+          			</tr>
+          		</table>
+          	</div>
+          	
+          	<div class="col-md-6">
+          		<h3>Penduduk Paling Muda</h3>
+          		<table>
+          			<tr>
+          				<td style="padding-right:10px">NIK</td>
+          				<td th:text="${youngest.nik}"></td>
+          			</tr>
+          			<tr>
+          				<td style="padding-right:10px">Nama</td>
+          				<td th:text="${youngest.nama}"></td>
+          			</tr>
+          			<tr>
+          				<td style="padding-right:10px">Tanggal Lahir</td>
+          				<td th:text="${youngest.tanggal_lahir}"></td>
+          			</tr>
+          		</table>
+          	</div>
+          </div>
+          
+          
+          <hr/>
+          
+          <table class="table table-striped" id="myTable">
+                <thead>
+                  <tr style="font-weight:bold;padding:5px">
+	          		<td>No</td>
+	          		<td>Nama Lengkap</td>
+	          		<td>NIK</td>
+	          		<td>Jenis Kelamin</td>
+	          		<td>Detail</td>
+	          	</tr>
+                </thead>
+                
+                <tbody>
+                	<tr th:each="penduduk,iterationStatus: ${listPenduduk}">
+                		<td th:text="${iterationStatus.count}"></td>
+                		<td th:text="${penduduk.nama}"></td>
+                		<td th:text="${penduduk.nik}"></td>
+                		<td th:switch="${penduduk.jenis_kelamin}">
+		          			<span th:case="'1'">Wanita</span>
+		          			<span th:case="'0'">Pria</span>
+		          		</td>
+                		<td><a th:href="'/penduduk?nik=' + ${penduduk.nik}">[KLIK]</a></td>
+                	</tr>
+                </tbody>
+        	</table>
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script>
+	    $(document).ready(function(){
+		    $('#myTable').DataTable();
+		});
+    </script>
+  </body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/style.css"/>
+
+    <style>
+        body {
+          padding-top: 5rem;
+        }
+
+    </style>
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+	      <a class="navbar-brand" href="#">SIDUK</a>
+	      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	
+	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="/">Home</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+	          </li>
+	        </ul>
+	        
+	      </div>
+	  </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <main class="col-sm-12" role="main">
+          <h1 th:text="'Lihat Data Keluarga - ' + ${keluarga.nomor_kk}">...</h1>
+          
+          <table>
+          	<tr>
+          		<td style="font-weight:bold; padding-right:30px">NKK</td>
+          		<td th:text="${keluarga.nomor_kk}">...</td>
+          	</tr>
+          	<tr>
+          		<td style="font-weight:bold; padding-right:30px">Alamat</td>
+          		<td th:text="${keluarga.alamat}"></td>
+          	</tr>
+          	<tr>
+          		<td style="font-weight:bold; padding-right:30px">RT/RW</td>
+          		<td th:text="${keluarga.RT} + '/' + ${keluarga.RW}"></td>
+          	</tr>
+          	<tr>
+          		<td style="font-weight:bold; padding-right:30px">Kelurahan/Desa</td>
+          		<td th:text="${keluarga.kelurahan.nama_kelurahan}"></td>
+          	</tr>
+          	<tr>
+          		<td style="font-weight:bold; padding-right:30px">Kecamatan</td>
+          		<td th:text="${keluarga.kelurahan.kecamatan.nama_kecamatan}"></td>
+          	</tr>
+          	<tr>
+          		<td style="font-weight:bold; padding-right:30px">Kota</td>
+          		<td th:text="${keluarga.kelurahan.kecamatan.kota.nama_kota}"></td>
+          	</tr>
+          	<tr>
+          		<td style="font-weight:bold; padding-right:30px">Status</td>
+          		<td><span th:switch="${keluarga.is_tidak_berlaku	}">
+			  	<span th:case="'0'">Aktif</span>
+          		<span th:case="'1'">Tidak Aktif</span>
+			  </span></td>
+          	</tr>
+          	
+          </table>
+          
+          <hr/>
+          <a th:href="'keluarga/ubah/' + ${keluarga.nomor_kk}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i>
+          	 Ubah Data</a>
+          <hr/>
+          <h3>Anggota Keluarga</h3>
+          
+          <table class="table table-striped">
+                <thead>
+                  <tr style="font-weight:bold;padding:5px">
+	          		<td>No</td>
+	          		<td>Nama Lengkap</td>
+	          		<td>NIK</td>
+	          		<td>Jenis Kelamin</td>
+	          		<td>Tempat Lahir</td>
+	          		<td>Tanggal Lahir</td>
+	          		<td>Agama</td>
+	          		<td>Pekerjaan</td>
+	          		<td>Status Perkawinan</td>
+	          		<td>Status dalam Keluarga</td>
+	          		<td>Kewarganegaraan</td>
+	          		<td>Status Kematian</td>
+	          	</tr>
+                </thead>
+                
+                <tbody>
+                	<tr th:each="penduduk,iterationStatus: ${keluarga.anggota_keluarga}">
+                		<td th:text="${iterationStatus.count}"></td>
+                		<td th:text="${penduduk.nama}"></td>
+                		<td th:text="${penduduk.nik}"></td>
+                		<td th:switch="${penduduk.jenis_kelamin}">
+		          			<span th:case="'1'">Wanita</span>
+		          			<span th:case="'0'">Pria</span>
+		          		</td>
+                		<td th:text="${penduduk.tempat_lahir}"></td>
+                		<td th:text="${penduduk.tanggal_lahir}"></td>
+                		<td th:text="${penduduk.agama}"></td>
+                		<td th:text="${penduduk.pekerjaan}"></td>
+                		<td th:text="${penduduk.status_perkawinan}"></td>
+                		<td th:text="${penduduk.status_dalam_keluarga}"></td>
+                		<td th:switch="${penduduk.is_wni}">
+		          			<span th:case="'1'">WNI</span>
+		          			<span th:case="'0'">Bukan WNI</span>
+		          		</td>
+		          		<td th:switch="${penduduk.is_wafat}">
+		          			<span th:case="'1'">Wafat</span>
+		          			<span th:case="'0'">Hidup</span>
+		          		</td>
+                	</tr>
+                </tbody>
+        	</table>
+          
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <style>
+        body {
+          padding-top: 5rem;
+        }
+
+    </style>
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+	      <a class="navbar-brand" href="#">SIDUK</a>
+	      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	
+	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="/">Home</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+	          </li>
+	        </ul>
+	        
+	      </div>
+	  </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <main class="col-sm-12" role="main">
+          <h1>Tambah Penduduk Baru</h1>
+          <form th:object="${penduduk}" th:action="${oldpenduduk.nik} == null ? '/penduduk/tambah/' : '/penduduk/ubah/' + ${oldpenduduk.nik}" method="POST">
+			  <div class="form-group">
+			    <label for="inputNama">Nama</label>
+			    <input name="nama" th:value="${oldpenduduk.nama}" type="text" class="form-control" id="inputNama" />
+			  </div>
+			  <div class="form-group">
+			    <label for="inputTempatLahir">Tempat Lahir</label>
+			    <input name="tempat_lahir" th:value="${oldpenduduk.tempat_lahir}" type="text" class="form-control" id="inputTempatLahir"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputTanggalLahir">Tanggal Lahir</label>
+			    <input name="tanggal_lahir" th:value="${oldpenduduk.tanggal_lahir}" type="text" class="form-control" id="inputTanggalLahir"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputJenisKelamin">Jenis Kelamin</label>
+			    <select name="jenis_kelamin" class="form-control" id="inputJenisKelamin">
+			    	<option value="0" th:selected="${oldpenduduk.jenis_kelamin == 0}">Pria</option>
+			    	<option value="1" th:selected="${oldpenduduk.jenis_kelamin == 1}">Wanita</option>
+			    </select>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputKewarganegaraan">Kewarganegaraan</label>
+			    <select name="is_wni" class="form-control" id="inputKewarganegaraan">
+			    	<option value="1" th:selected="${oldpenduduk.is_wni == 1}">WNI</option>
+			    	<option value="0" th:selected="${oldpenduduk.is_wni == 0}">Bukan WNI</option>
+			    </select>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputIdKeluarga">Id Keluarga</label>
+			    <input name="id_keluarga" th:value="${oldpenduduk.keluarga.id}" type="text" class="form-control" id="inputIdKeluarga"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputAgama">Agama</label>
+			    <input name="agama" th:value="${oldpenduduk.agama}" type="text" class="form-control" id="inputAgama"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPekerjan">Pekerjaan</label>
+			    <input name="pekerjaan" th:value="${oldpenduduk.pekerjaan}" type="text" class="form-control" id="inputPekerjan"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputPerkawinan">Status Perkawinan</label>
+			    <select name="status_perkawinan" class="form-control" id="inputPerkawinan">
+			    	<option value="KAWIN" th:selected="${oldpenduduk.status_perkawinan == 'KAWIN'}">KAWIN</option>
+			    	<option value="BELUM KAWIN" th:selected="${oldpenduduk.status_perkawinan == 'BELUM KAWIN'}">BELUM KAWIN</option>
+			    </select>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputStatusDalamKeluarga">Status Dalam Keluarga</label>
+			    <input name="status_dalam_keluarga" th:value="${oldpenduduk.status_dalam_keluarga}" type="text" class="form-control" id="inputStatusDalamKeluarga"/>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputGolonganDarah">Golongan Darah</label>
+			    <select name="golongan_darah" class="form-control" id="inputGolonganDarah">
+			    	<option value="O" th:selected="${oldpenduduk.golongan_darah == 'O'}">O</option>
+			    	<option value="A" th:selected="${oldpenduduk.golongan_darah == 'A'}">A</option>
+			    	<option value="B" th:selected="${oldpenduduk.golongan_darah == 'B'}">B</option>
+			    	<option value="AB" th:selected="${oldpenduduk.golongan_darah == 'AB'}">AB</option>
+			    </select>
+			  </div>
+			  <div class="form-group">
+			    <label for="inputKematian">Status Kematian</label>
+			    <select name="is_wafat" class="form-control" id="inputKematian">
+			    	<option value="0" th:selected="${oldpenduduk.is_wafat == 0}">Hidup</option>
+			    	<option value="1" th:selected="${oldpenduduk.is_wafat == 1}">Wafat</option>
+			    </select>
+			  </div>
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			  
+		  </form>
+
+          
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

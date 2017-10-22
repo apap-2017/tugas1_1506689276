@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+
+    <style>
+        body {
+          padding-top: 5rem;
+        }
+
+    </style>
+
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+      <div class="container">
+	      <a class="navbar-brand" href="#">SIDUK</a>
+	      <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="navbar-toggler-icon"></span>
+	      </button>
+	
+	      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+	        <ul class="navbar-nav mr-auto">
+	          <li class="nav-item active">
+	            <a class="nav-link" href="/">Home</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link" href="/penduduk/cari">Cari Data</a>
+	          </li>
+	        </ul>
+	        
+	      </div>
+	  </div>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <main class="col-sm-12" role="main">
+          <h1>Tambah Keluarga Baru</h1>
+          <form th:object="${keluarga}" th:action="${oldkeluarga.nomor_kk} == null ? '/keluarga/tambah' : '/keluarga/ubah/' + ${oldkeluarga.nomor_kk}" method="POST">
+			  <div class="form-group">
+			    <label for="inputAlamat">Alamat</label>
+			    <input name="alamat" th:value="${oldkeluarga.alamat}" type="text" class="form-control" id="inputAlamat" />
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="inputRt">RT</label>
+			    <input name="RT" th:value="${oldkeluarga.RT}" type="text" class="form-control" id="inputRt" />
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="inputRw">RW</label>
+			    <input name="RW" th:value="${oldkeluarga.RW}" type="text" class="form-control" id="inputRw" />
+			  </div>
+			  
+			  <div class="form-group">
+			    <label for="inputKelurahan">Kelurahan</label>
+			    <select name="id_kelurahan" class="form-control" id="inputKelurahan">
+			    	<option th:each="kelurahan,iterationStatus: ${allkelurahan}" th:selected="${oldkeluarga.kelurahan.id} == ${kelurahan.id}" th:value="${kelurahan.id}" th:text="${kelurahan.nama_kelurahan}+' (kec: ' + ${kelurahan.kecamatan.nama_kecamatan} + ', kota: ' + ${kelurahan.kecamatan.kota.nama_kota} + ') '"></option>
+			    </select>
+			  </div>
+			  
+			  
+			  <button type="submit" class="btn btn-primary">Submit</button>
+			  
+		  </form>
+
+          
+        </main>
+      </div>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <script src="/js/jquery-3.2.1.slim.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+  </body>
+</html>

@@ -242,12 +242,12 @@ public class PendudukController {
 				
 				Date o = format.parse(oldest.getTanggal_lahir());
 				Date c = format.parse(penduduk.getTanggal_lahir());
-				if (c.compareTo(o) > 0) {
+				if (c.compareTo(o) < 0) {
 					oldest = penduduk;
 				}
 				
 				Date y = format.parse(youngest.getTanggal_lahir());
-				if (c.compareTo(y) < 0) {
+				if (c.compareTo(y) > 0) {
 					youngest = penduduk;
 				}
 			}
